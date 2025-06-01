@@ -1,17 +1,21 @@
 # AutoStash
 
-WASM-powered browser extension in Rust that saves form progress and saves it into [chrome storage](https://developer.chrome.com/docs/extensions/reference/api/storage). Icon generatd with Google Gemini.
+WASM-powered browser extension in Rust that saves form progress into [chrome storage](https://developer.chrome.com/docs/extensions/reference/api/storage), so you don't have to refill the online forms if the submit button failed or browser crashed. Icon generatd with Google Gemini.
 
+Tools You’ll Use:
+- wasm-bindgen: for JS interop
+- wasm-pack: to compile Rust to WebAssembly
+- JavaScript wrapper to load the WASM module in your extension
 
-⚙️ Tools You’ll Use
+![Screenshot](screenshot.png)
 
-🦀 wasm-bindgen: for JS interop
+## Test with Chrome Extension Developer mode
+Build the wasm module
+```
+wasm-pack build --target web
+```
 
-🧰 wasm-pack: to compile Rust to WebAssembly
-
-🌍 Web Extension API: to run your Rust code in the browser
-
-📦 JavaScript wrapper to load the WASM module in your extension
+Navigate to [Chrome extensions](chrome://extensions/), turn on Developer mode and load the module unpacked.
 
 ## Why this is a Rust library and not an executable
 
@@ -41,11 +45,3 @@ Rust executables (`[[bin]]`) compile to native machine code — not WebAssembly.
 - There's no terminal/CLI to invoke it.
 
 - You need to interoperate with the DOM, events, etc., which requires JS integration.
-
-## Test with Chrome Extension Developer mode
-Build the wasm module
-```
-wasm-pack build --target web
-```
-
-Navigate to chrome://extensions/ , turn on Developer mode and load the module unpacked.
