@@ -11,7 +11,7 @@ pub mod storage;
 
 #[wasm_bindgen(start)]
 pub async fn init() -> Result<(), JsError> {
-    console_log::init_with_level(log::Level::Info).expect("can't initialize logger");
+    // console_log::init_with_level(log::Level::Info).expect("can't initialize logger");
     let window = window().ok_or(JsError::new("no window"))?;
     let mut api = Api::new(window);
     api.start()

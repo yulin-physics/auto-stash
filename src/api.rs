@@ -43,10 +43,8 @@ impl Api {
             .map_err(|e| Error::FailedToFindPathname(e.as_string().unwrap_or_default()))?;
 
         self.url = format!("{origin}{pathname}");
-        log::info!("here {:?}", self.url);
 
         let saved_data = get_key_from_storage(&self.url).await?;
-        log::info!("{saved_data:?}");
         if !saved_data.is_null() && !saved_data.is_undefined() {
             self.fields = serde_wasm_bindgen::from_value(saved_data)
                 .map_err(|e| Error::FailedToFindPathname(e.to_string()))?;
@@ -85,7 +83,6 @@ impl Api {
             .document()?
             .query_selector_all("input, select, textarea")
             .map_err(|e| Error::CannotQueryInputs(e.as_string().unwrap_or_default()))?;
-        log::info!("{inputs:?} ");
 
         let length = inputs.length();
 
@@ -109,11 +106,9 @@ impl Api {
 }
 
 async fn get_key_from_storage(key: &str) -> Result<JsValue> {
-    log::info!("{key:?}");
     let js_object = wasm_bindgen_futures::JsFuture::from(get_from_chrome_storage(key))
         .await
         .map_err(|e| Error::FailedToGetKeyEnabled(e.as_string().unwrap_or_default()))?;
-    log::info!("{js_object:?}");
 
     Ok(js_sys::Reflect::get(&js_object, &JsValue::from_str(key))
         .map_err(|e| Error::FailedToGetKeyEnabled(e.as_string().unwrap_or_default()))?)
