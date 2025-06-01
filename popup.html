@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AutoStash</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="container">
+
+    <section class="section">
+      <h2>📝 Status</h2>
+      <label class="toggle">
+        <input type="checkbox" id="enableToggle" />
+        <span class="slider"></span>
+        <span class="label-text" id="toggleStatus">Auto Save</span>
+      </label>
+    </section>
+
+    <section class="section">
+      <h2>📦 Saved Forms</h2>
+      <ul id="storageList"></ul>
+    </section>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

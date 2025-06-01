@@ -1,7 +1,6 @@
 # AutoStash
-Create Chrome extensions with Rust & WASM.
 
-WASM-powered browser extension in Rust that saves form progress and saves it into [chrome storage](https://developer.chrome.com/docs/extensions/reference/api/storage).
+WASM-powered browser extension in Rust that saves form progress and saves it into [chrome storage](https://developer.chrome.com/docs/extensions/reference/api/storage). Icon generatd with Google Gemini.
 
 
 ⚙️ Tools You’ll Use
@@ -43,15 +42,10 @@ Rust executables (`[[bin]]`) compile to native machine code — not WebAssembly.
 
 - You need to interoperate with the DOM, events, etc., which requires JS integration.
 
-
-
-
-
-
-
-
-
-
-
+## Test with Chrome Extension Developer mode
+Build the wasm module
+```
 wasm-pack build --target web
+```
 
+Navigate to chrome://extensions/ , turn on Developer mode and load the module unpacked.

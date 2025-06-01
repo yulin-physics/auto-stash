@@ -24,10 +24,13 @@ web-sys = { version = "0.3", features = [
     "Event",
     "EventTarget",
     "Node",
-    "console",
-    "NodeList"
+    "NodeList",
+    "Location"
 ] }
 log = { version = "0.4", features = ["std", "serde"] }
+console_log = "0.2"
+anyhow = "1.0.98"
+thiserror = "2.0.12"
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3"

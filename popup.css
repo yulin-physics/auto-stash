@@ -1,0 +1,132 @@
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: #c1c5df;
+  margin: 0;
+  padding: 1.2rem;
+  width: 260px;
+  color: #3e3e3e;
+  width: 300px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.section {
+  background-color: #e4e6f1;
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+h2 {
+  font-size: 1rem;
+  margin: 0 0 0.8rem;
+  color: #4b3b40;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  position: relative;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  width: 40px;
+  height: 20px;
+  background-color: #d0cde1;
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #fff;
+  transition: transform 0.2s ease-in-out;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #b6dbd3;
+}
+
+input:checked + .slider::before {
+  transform: translateX(20px);
+}
+
+.label-text {
+  font-size: 0.95rem;
+}
+
+#storageList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #eafaf7;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  word-break: break-word;
+}
+
+button {
+  background-color: #f8c8c8;
+  border: none;
+  color: #5a2a2a;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  max-width: 80px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-left: auto;
+  
+}
+
+button:hover {
+  background-color: #f3a8a8;
+}
+
+button span {
+  color: #3e3e3e;
+  display: inline-block;
+  flex: 1;
+  padding-right: 8px;
+}
+
+
+.empty {
+  font-size: 0.85rem;
+  color: #888;
+  text-align: center;
+}

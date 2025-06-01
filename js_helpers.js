@@ -1,20 +1,20 @@
 export function save_to_chrome_storage(key, value) {
   if (Array.isArray(value)) {
-    const obj = { formData: value };
+    const obj = { url: value };
     chrome.storage.local.set(obj, () => {
       console.log("Saved full form data", value);
     });
   } else if (typeof value === "boolean") {
-    // Used for form_submitted flag
+    // Used for enabled flag
     chrome.storage.local.set({ [key]: value }, () => {
       console.log(`Saved flag ${key} = ${value}`);
     });
   } else {
-    chrome.storage.local.get(["formData"], (result) => {
-      let formData = result.formData || {};
+    chrome.storage.local.get([key], (result) => {
+      let formData = result[key] || {};
       formData[value.name] = value.value;
-      chrome.storage.local.set({ formData }, () => {
-        console.log("Saved field", value.name, value.value);
+      chrome.storage.local.set({[key]: formData}, () => {
+        console.log("Saved field", value);
       });
     });
   }

@@ -1,5 +1,4 @@
-import init from "./pkg/auto-stash.js";
-
 (async () => {
-  await init();
+  const wasm = await import("./pkg/auto_stash.js");
+  await wasm.default();
 })();
