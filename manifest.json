@@ -12,11 +12,11 @@
   "default_popup": "popup.html",
   "default_title": "AutoStash"
   },
-  "permissions": ["storage", "scripting", "activeTab"],
+  "permissions": ["storage"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["bootstrap.js"],
+      "js": ["content.js"],
       "run_at": "document_idle"
     }
   ],

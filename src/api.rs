@@ -1,7 +1,8 @@
 use anyhow::Result;
 use std::collections::HashMap;
-use wasm_bindgen::JsValue;
+use wasm_bindgen::prelude::wasm_bindgen;
 use wasm_bindgen::{JsCast, prelude::Closure};
+use wasm_bindgen::{JsError, JsValue};
 use web_sys::{
     Document, Element, HtmlInputElement, HtmlSelectElement, HtmlTextAreaElement, Window,
 };
@@ -11,10 +12,19 @@ use crate::{get_from_chrome_storage, save_to_chrome_storage, storage::FormField}
 const ENABLED: &str = "enabled";
 type FormFields = HashMap<String, String>;
 
+#[wasm_bindgen]
 pub struct Api {
     window: Window,
     url: String,
     fields: FormFields,
+}
+
+#[wasm_bindgen]
+impl Api {
+    #[wasm_bindgen(js_name = "start")]
+    pub async fn js_start(&mut self) -> Result<(), JsError> {
+        self.start().await.map_err(|e| JsError::new(&e.to_string()))
+    }
 }
 
 impl Api {
@@ -65,11 +75,15 @@ impl Api {
                 .map_err(|e| Error::FailedToFindElement(e.as_string().unwrap_or_default()))?
             {
                 if let Some(input) = el.dyn_ref::<HtmlInputElement>() {
-                    input.set_value(val);
+                    if input.value().is_empty() {
+                        input.set_value(val);
+                    }
                 } else if let Some(select) = el.dyn_ref::<HtmlSelectElement>() {
                     select.set_value(val);
                 } else if let Some(textarea) = el.dyn_ref::<HtmlTextAreaElement>() {
-                    textarea.set_value(val);
+                    if textarea.value().is_empty() {
+                        textarea.set_value(val);
+                    }
                 }
             }
         }
@@ -106,9 +120,7 @@ impl Api {
 }
 
 async fn get_key_from_storage(key: &str) -> Result<JsValue> {
-    let js_object = wasm_bindgen_futures::JsFuture::from(get_from_chrome_storage(key))
-        .await
-        .map_err(|e| Error::FailedToGetKeyEnabled(e.as_string().unwrap_or_default()))?;
+    let js_object = get_from_chrome_storage(key).await;
 
     Ok(js_sys::Reflect::get(&js_object, &JsValue::from_str(key))
         .map_err(|e| Error::FailedToGetKeyEnabled(e.as_string().unwrap_or_default()))?)

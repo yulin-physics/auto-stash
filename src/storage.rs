@@ -22,6 +22,6 @@ pub struct FormField {
 #[wasm_bindgen(module = "/js_helpers.js")]
 extern "C" {
     pub(crate) fn save_to_chrome_storage(key: &str, value: &JsValue);
-    pub(crate) fn get_from_chrome_storage(key: &str) -> js_sys::Promise;
+    pub(crate) async fn get_from_chrome_storage(key: &str) -> JsValue;
     pub(crate) fn clear_chrome_storage(key: &str);
 }
